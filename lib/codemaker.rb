@@ -17,28 +17,32 @@ class Codemaker
   end
 
   def cipher
-    code = Array.new(4)
-
+    length = 4
     puts 'Enter your code with 4 caps'
     colors.each { |k, v| print "#{k}: #{v}  " }
     puts
 
-    ask_colors(code)
+    ask_code(length)
   end
 
   private
 
   attr_reader :name, :colors
 
-  def ask_colors(array)
-    array.map do
-      input = gets.chomp
-      unless colors.include? input
+  def ask_code(length)
+    code = []
+    length.times do
+      input = gets.chomp.to_sym
+      unless colors.keys.include? input
         puts 'Wrong color'
         redo
       end
 
-      input
+      puts colors[input]
+      code << colors[input]
     end
+
+    puts "Your code: #{code.join(' ')}"
+    code
   end
 end
