@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
-require_relative 'board'
+# require_relative 'board'
 require_relative 'codemaker'
 require_relative 'codebreaker'
 
 # Main class for the Mastermind game
 class Game
   def initialize
-    @board = Board.new
-    @codemaker = Codemaker.new
-    @codebreaker = Codebreaker.new
+    # @board = Board.new
+    @codemaker = Codemaker.new('Player 1')
+    @codebreaker = Codebreaker.new('Player 2')
+  end
+
+  def play
+    pass
   end
 end

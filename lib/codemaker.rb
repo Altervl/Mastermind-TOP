@@ -1,16 +1,28 @@
 # frozen_string_literal: true
 
+require 'colorize'
+
 # Class for Codemaker player role in Mastermind game
 class Codemaker
   def initialize(name)
     @name = name
-    @colors = %w[blue yellow green purple orange]
+    @colors = {
+      '1': 'o'.light_blue,
+      '2': 'o'.light_yellow,
+      '3': 'o'.light_green,
+      '4': 'o'.light_magenta,
+      '5': 'o'.light_cyan,
+      '6': 'o'.grey
+    }
   end
 
   def cipher
     code = Array.new(4)
-    puts "Enter your code with 4 caps of colors:
-          red, blue, yellow, green, white, orange, purple:"
+
+    puts 'Enter your code with 4 caps'
+    colors.each { |k, v| print "#{k}: #{v}  " }
+    puts
+
     ask_colors(code)
   end
 
