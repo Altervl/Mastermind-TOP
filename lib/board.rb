@@ -7,7 +7,7 @@ class Board
     @tips = []
   end
 
-  def display
+  def display(attempts = [], tips = [])
     attempts.each do |attempt|
       puts attempt.join(' ')
     end
