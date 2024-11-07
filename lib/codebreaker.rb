@@ -2,30 +2,30 @@
 
 # Class for Codebreaker player role in the Mastermind game
 class Codebreaker
-  def decipher(hash)
+  def decipher(colors)
     puts 'Enter your guess with 4 caps'
-    hash.each { |k, v| print "#{k}: #{v}  " }
+    colors.each { |k, v| print "#{k}: #{v}  " }
     puts
 
-    guess(length)
+    guess(colors)
   end
 
   private
 
-  def guess(length)
+  def guess(hash)
     code = []
-    length.times do
+    4.times do
       input = gets.chomp.to_sym
-      unless colors.keys.include? input
+      unless hash.keys.include? input
         puts 'Wrong color'
         redo
       end
 
-      puts colors[input]
-      code << colors[input]
+      puts hash[input]
+      code << hash[input]
     end
 
-    puts "Your code: #{code.join(' ')}"
+    puts "Your code: #{code.join ' '}"
     code
   end
 end

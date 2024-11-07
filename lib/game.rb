@@ -24,19 +24,25 @@ class Game
 
   def play
     round = 1
-    code = codemaker.cipher(colors)
-    try = nil
-    board.display
+    code = codemaker.cipher colors
 
-    until round > rounds || try == riddle
+    loop do
       puts "Round #{round}"
-      try = codebreaker.decipher(colors)
-      board.display
-      check_try(code, try)
-    end
+      try = codebreaker.decipher colors
+      tip = check_try(code, try)
+      board.display(try, tip)
+      round += 1
 
-    puts "Game over. Code: #{riddle.join(' ')}" if round > rounds
-    puts 'Congrats, you deciphered the code!' if try == riddle
+      if round > rounds
+        puts "Game over. Code: #{code.join ' '}"
+        break
+      end
+
+      if try == code
+        puts 'Congrats, you deciphered the code!'
+        break
+      end
+    end
   end
 
   def check_try(code, try)
@@ -50,9 +56,10 @@ class Game
     end
 
     puts tip.join ' '
+    tip
   end
 
   private
 
-  attr_reader :codemaker, :codebreaker, :rounds, :colors
+  attr_reader :board, :codemaker, :codebreaker, :rounds, :colors
 end

@@ -7,11 +7,18 @@ class Board
     @tips = []
   end
 
-  def display(attempts = [], tips = [])
-    attempts.each do |attempt|
-      puts attempt.join(' ')
-    end
+  def display(try, tip)
+    attempts << try
+    tips << tip
 
-    tips.join(' ')
+    attempts.size.times do |time|
+      attempt = attempts[time - 1].join ' '
+      hint = tips[time - 1].join
+      puts "#{attempt} | #{hint}"
+    end
   end
+
+  private
+
+  attr_reader :attempts, :tips
 end
