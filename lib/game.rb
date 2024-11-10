@@ -29,17 +29,16 @@ class Game
         break
       end
 
-      puts "Round #{round}"
       try = codebreaker.decipher colors
+
+      tip = check_try(code, try)
+      board.display(try, tip)
+      round += 1
 
       if try == code
         puts 'Congrats, you deciphered the code!'
         break
       end
-
-      tip = check_try(code, try)
-      board.display(try, tip)
-      round += 1
     end
   end
 
@@ -70,7 +69,6 @@ class Game
       end
     end
 
-    puts "Code: #{code.join ' '}"
     hint
   end
 

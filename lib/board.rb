@@ -11,10 +11,11 @@ class Board
     attempts << try
     cues << cue
 
-    attempts.size.times do |time|
-      attempt = attempts[time].join ' '
-      hint = cues[time].join
-      puts "#{attempt} | #{hint}"
+    attempts.size.times do |t|
+      attempt = attempts[t].join ' '
+      hint = cues[t].join
+      puts "Round #{t + 1} | Try: #{attempt} | Hint: #{hint}"
+      puts '–' * 35
     end
   end
 
