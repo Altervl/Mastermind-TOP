@@ -4,21 +4,21 @@
 class Board
   def initialize
     @attempts = []
-    @tips = []
+    @cues = []
   end
 
-  def display(try, tip)
+  def display(try, cue)
     attempts << try
-    tips << tip
+    cues << cue
 
     attempts.size.times do |time|
-      attempt = attempts[time - 1].join ' '
-      hint = tips[time - 1].join
+      attempt = attempts[time].join ' '
+      hint = cues[time].join
       puts "#{attempt} | #{hint}"
     end
   end
 
   private
 
-  attr_reader :attempts, :tips
+  attr_reader :attempts, :cues
 end

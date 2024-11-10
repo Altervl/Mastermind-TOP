@@ -13,7 +13,7 @@ class Codebreaker
   private
 
   def guess(hash)
-    code = []
+    try = []
     4.times do
       input = gets.chomp.to_sym
       unless hash.keys.include? input
@@ -22,10 +22,9 @@ class Codebreaker
       end
 
       puts hash[input]
-      code << hash[input]
+      try << hash[input]
     end
 
-    puts "Your code: #{code.join ' '}"
-    code
+    try
   end
 end

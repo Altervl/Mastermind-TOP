@@ -11,14 +11,11 @@ class Game
     @board = Board.new
     @codemaker = Codemaker.new
     @codebreaker = Codebreaker.new
-    @rounds = 12
+    @rounds = 10
     @colors = {
-      '1': 'o'.light_blue,
-      '2': 'o'.light_yellow,
-      '3': 'o'.light_green,
-      '4': 'o'.light_magenta,
-      '5': 'o'.light_cyan,
-      '6': 'o'.grey
+      '1': 'o'.light_blue,  '2': 'o'.light_yellow,
+      '3': 'o'.light_green, '4': 'o'.light_magenta,
+      '5': 'o'.light_cyan,  '6': 'o'.grey
     }
   end
 
@@ -27,36 +24,54 @@ class Game
     code = codemaker.cipher colors
 
     loop do
-      puts "Round #{round}"
-      try = codebreaker.decipher colors
-      tip = check_try(code, try)
-      board.display(try, tip)
-      round += 1
-
       if round > rounds
         puts "Game over. Code: #{code.join ' '}"
         break
       end
 
+      puts "Round #{round}"
+      try = codebreaker.decipher colors
+
       if try == code
         puts 'Congrats, you deciphered the code!'
         break
       end
+
+      tip = check_try(code, try)
+      board.display(try, tip)
+      round += 1
     end
   end
 
   def check_try(code, try)
-    white = '.'.white
-    red = '.'.light_red
-    overlap = code.intersection try
-    tip = Array.new(overlap.size, white)
+    # Variables for hint about the decipher try
+    hint = []
 
-    overlap.each do |el|
-      tip.unshift(red).pop if try.index(el) == code.index(el)
+    # Argument copies for changing
+    code_copy = code.dup
+    try_copy = try.dup
+
+    # Check for exact matches
+    try_copy.each_with_index do |el, i|
+      next unless el == code_copy[i]
+
+      hint << '.'.light_red
+
+      # Remove element from later checks
+      code_copy[i] = nil
+      try_copy[i] = nil
     end
 
-    puts tip.join ' '
-    tip
+    # Check for color existence
+    try_copy.compact.each do |el|
+      if code_copy.include?(el)
+        hint << '.'.white
+        code_copy[code_copy.index(el)] = nil # Убираем этот цвет из дальнейших проверок
+      end
+    end
+
+    puts "Code: #{code.join ' '}"
+    hint
   end
 
   private
