@@ -31,8 +31,8 @@ class Game
 
       try = codebreaker.decipher colors
 
-      tip = check_try(code, try)
-      board.display(try, tip)
+      cue = check_try(code, try)
+      board.display(try, cue)
       round += 1
 
       if try == code
