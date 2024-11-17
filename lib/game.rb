@@ -21,7 +21,7 @@ class Game
 
   def play
     round = 1
-    code = codemaker.cipher colors
+    code = codemaker.cipher
 
     loop do
       if round > rounds
@@ -29,7 +29,7 @@ class Game
         break
       end
 
-      try = codebreaker.decipher colors
+      try = codebreaker.decipher
 
       cue = check_try(code, try)
       board.display(try, cue)

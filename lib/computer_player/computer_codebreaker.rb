@@ -4,18 +4,13 @@ require 'colorize'
 
 # Class for computer player as a codebreaker in the Mastermind game
 class ComputerCodebreaker
-  def initialize
+  def initialize(colors)
+    @colors = colors
     @combos = generate_combos
   end
 
-  def decipher(colors, cue)
-    guess = []
-    4.times do
-      sample = colors.keys.sample
-      guess << colors[sample]
-    end
-
-    guess
+  def decipher(cue)
+    
   end
 
   private

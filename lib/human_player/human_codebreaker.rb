@@ -4,7 +4,11 @@ require 'colorize'
 
 # Class for human player as a codebreaker in the Mastermind game
 class HumanCodebreaker
-  def decipher(colors)
+  def initialize(colors)
+    @colors = colors
+  end
+
+  def decipher
     puts "Enter your guess: #{colors.each { |k, v| print "#{k}: #{v}  " }}\n"
 
     guess = []
@@ -21,4 +25,8 @@ class HumanCodebreaker
 
     guess
   end
+
+  private
+
+  attr_reader :colors
 end
